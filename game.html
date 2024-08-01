@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Likes and Dislikes Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .question {
+            margin: 10px 0;
+        }
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Likes and Dislikes Game</h1>
+    <div id="game"></div>
+    <button onclick="startGame()">Start Game</button>
+    <div id="results"></div>
+
+    <script>
+        const questions = [
+            "What is your favorite color?",
+            "What is your least favorite food?",
+            "What is your favorite hobby?",
+            "What is your least favorite movie?",
+            "What is your favorite book?",
+            "What is your least favorite subject in school?",
+            "What is your favorite season?",
+            "What is your least favorite chore?"
+        ];
+        
+        let currentQuestionIndex = 0;
+        let answers = [];
+
+        function startGame() {
+            document.getElementById('results').innerHTML = '';
+            answers = [];
+            currentQuestionIndex = 0;
+            askQuestion();
+        }
+
+        function askQuestion() {
+            if (currentQuestionIndex < questions.length) {
+                const question = questions[currentQuestionIndex];
+                const answer = prompt(question);
+                if (answer !== null) {
+                    answers.push({ question: question, answer: answer });
+                    currentQuestionIndex++;
+                    askQuestion();
+                }
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            let resultHtml = '<h2>Results</h2>';
+            answers.forEach((qa) => {
+                resultHtml += <p><strong>${qa.question}</strong><br>${qa.answer}</p>;
+            });
+            document.getElementById('results').innerHTML = resultHtml;
+        }
+    </script>
+</body>
+</html>
